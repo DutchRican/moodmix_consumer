@@ -1,0 +1,93 @@
+class Films {
+  late String film;
+  late String director;
+  late String filmDescription;
+
+  Films({required this.film, required this.director, required this.filmDescription});
+  Films.fromJson(Map<String, dynamic> json) {
+    film = json['film'];
+    director = json['director'];
+    filmDescription = json['film_description'];
+  }
+}
+
+class Albums {
+  late String album;
+  late String artist;
+  late String albumDescription;
+
+  Albums({required this.album, required this.artist, required this.albumDescription});
+  Albums.fromJson(Map<String, dynamic> json) {
+    album = json['album'];
+    artist = json['artist'];
+    albumDescription = json['album_description'];
+  }
+}
+
+class Series {
+  late String series;
+  late String creators;
+  late String seriesDescription;
+
+  Series({required this.series, required this.creators, required this.seriesDescription});
+  Series.fromJson(Map<String, dynamic> json) {
+    series = json['series'];
+    creators = json['creators'];
+    seriesDescription = json['series_description'];
+  }
+}
+
+class RequestedAlbum {
+  late String album;
+  late String artist;
+
+  RequestedAlbum({required this.album, required this.artist});
+
+  RequestedAlbum.fromJson(Map<String, dynamic> json) {
+    album = json['album'];
+    artist = json['artist'];
+  }
+}
+
+class Recommendations {
+  late String mood;
+  late List<Films> films;
+  late List<Albums> albums;
+  late List<Series> series;
+  late List<RequestedAlbum> requestedAlbum;
+
+  Recommendations(
+      {required this.mood,
+      required this.films,
+      required this.albums,
+      required this.series,
+      required this.requestedAlbum});
+
+  Recommendations.fromJson(Map<String, dynamic> json) {
+    mood = json['mood'];
+    if (json['films'] != null) {
+      films = <Films>[];
+      json['films'].forEach((v) {
+        films.add(Films.fromJson(v));
+      });
+    }
+    if (json['albums'] != null) {
+      albums = <Albums>[];
+      json['albums'].forEach((v) {
+        albums.add(Albums.fromJson(v));
+      });
+    }
+    if (json['series'] != null) {
+      series = <Series>[];
+      json['series'].forEach((v) {
+        series.add(Series.fromJson(v));
+      });
+    }
+    if (json['requestedAlbum'] != null) {
+      requestedAlbum = <RequestedAlbum>[];
+      json['requestedAlbum'].forEach((v) {
+        requestedAlbum.add(RequestedAlbum.fromJson(v));
+      });
+    }
+  }
+}
