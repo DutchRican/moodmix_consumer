@@ -18,7 +18,19 @@ class App extends StatelessWidget {
         appBar: AppBar(
           title: const Text("MoodMix"),
         ),
-        body: Column(children: const [Description(), Search()]),
+        body: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
+            child: Column(children: const [
+              Description(),
+              SizedBox(
+                height: 10.0,
+              ),
+              Expanded(
+                flex: 4,
+                child: Search(),
+              )
+            ])),
       ),
     );
   }

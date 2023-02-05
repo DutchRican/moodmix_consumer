@@ -1,7 +1,7 @@
 class Films {
-  late String film;
-  late String director;
-  late String filmDescription;
+  late String? film;
+  late String? director;
+  late String? filmDescription;
 
   Films({required this.film, required this.director, required this.filmDescription});
   Films.fromJson(Map<String, dynamic> json) {
@@ -12,9 +12,9 @@ class Films {
 }
 
 class Albums {
-  late String album;
-  late String artist;
-  late String albumDescription;
+  late String? album;
+  late String? artist;
+  late String? albumDescription;
 
   Albums({required this.album, required this.artist, required this.albumDescription});
   Albums.fromJson(Map<String, dynamic> json) {
@@ -25,9 +25,9 @@ class Albums {
 }
 
 class Series {
-  late String series;
-  late String creators;
-  late String seriesDescription;
+  late String? series;
+  late String? creators;
+  late String? seriesDescription;
 
   Series({required this.series, required this.creators, required this.seriesDescription});
   Series.fromJson(Map<String, dynamic> json) {

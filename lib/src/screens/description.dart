@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class Description extends StatelessWidget {
   const Description({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      padding: const EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
+    return Expanded(
+      flex: 1,
       child: Column(
         children: const [
           Text(

@@ -46,3 +46,5 @@ app.*.map.json
 
 # api_key
 **/lib/src/logic/api_key.dart
+# api_url
+**/lib/src/logic/api_url.dart
