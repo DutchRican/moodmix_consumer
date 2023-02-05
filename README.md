@@ -2,6 +2,13 @@
 
 A new Flutter project.
 
+## add api_url and api_key
+
+in /lib/src/logic add api_key.dart and api_url.dart  
+these files will need the apikey for musicbrainz and the apiUrl for ChatGPT  
+both files are ignored for git
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
