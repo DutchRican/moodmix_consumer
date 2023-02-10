@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:mood_mix/src/logic/recommendations.dart';
-import 'package:mood_mix/src/logic/suggestions.dart';
-import 'package:mood_mix/src/logic/music.dart';
+import 'package:mood_mix/src/logic/models/recommendations.dart';
+import 'package:mood_mix/src/logic/resources/suggestions.dart';
+import 'package:mood_mix/src/logic/models/music_brainz.dart';
 import 'package:mood_mix/src/screens/recommended.dart';
 
 class Search extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../logic/recommendations.dart';
+import '../logic/models/recommendations.dart';
 
 class BuildAlbums extends StatelessWidget {
   const BuildAlbums({

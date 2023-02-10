@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../logic/recommendations.dart';
+import '../logic/models/recommendations.dart';
 import 'build_albums.dart';
 import 'build_films.dart';
 import 'build_series.dart';

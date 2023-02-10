@@ -1,20 +1,10 @@
 import 'dart:convert';
-import 'package:mood_mix/src/logic/api_url.dart';
-import 'package:mood_mix/src/logic/recommendations.dart';
-
-import 'api_key.dart';
-import 'music.dart';
 import 'package:http/http.dart' as http;
+import 'package:mood_mix/src/logic/models/music_brainz.dart';
+
+import '../api_url.dart';
 
 class MusicSuggestions {
-  static Future<List<Release>> getMusic(String query) async {
-    if (query.length < 2) return [];
-    var resp =
-        await http.get(Uri.parse("https://musicbrainz.org/ws/2/release?query=${Uri.encodeComponent(query)}&fmt=json"));
-    var items = Music.fromJson(jsonDecode(resp.body));
-    return items.releases.toList();
-  }
-
   static Future<int> submitRequest(Release release) async {
     final uri = Uri.parse(apiUrl);
 

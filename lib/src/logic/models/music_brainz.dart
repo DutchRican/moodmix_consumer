@@ -1,8 +1,8 @@
 class ArtistCredit {
-  late String name;
-  late String artistName;
+  String? name;
+  String? artistName;
 
-  ArtistCredit({required this.name, required this.artistName});
+  ArtistCredit({name, artistName});
 
   ArtistCredit.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -11,15 +11,18 @@ class ArtistCredit {
 }
 
 class Release {
-  late String id;
-  late int score;
-  late String title;
-  late String status;
-  late List<ArtistCredit> artistCredit;
+  String? id;
+  int? score;
+  String? title;
+  String? status;
+  List<ArtistCredit>? artistCredit;
+  String? error;
 
-  Release(
-      {required this.id, required this.score, required this.title, required this.status, required this.artistCredit});
+  Release({id, score, title, status, artistCredit});
 
+  Release.withError(String errorMessage) {
+    error = errorMessage;
+  }
   Release.fromJson(Map<String, dynamic> json) {
     id = json['id'] as String;
     score = json['score'] as int;
@@ -30,9 +33,9 @@ class Release {
 }
 
 class Music {
-  late List<Release> releases;
+  List<Release>? releases;
 
-  Music({required this.releases});
+  Music({releases});
 
   Music.fromJson(Map<String, dynamic> data) {
     releases = (data['releases'] as List).map((item) => Release.fromJson(item)).toList();

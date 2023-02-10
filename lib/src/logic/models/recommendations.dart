@@ -50,11 +50,12 @@ class RequestedAlbum {
 }
 
 class Recommendations {
-  late String mood;
-  late List<Films> films;
-  late List<Albums> albums;
-  late List<Series> series;
-  late List<RequestedAlbum> requestedAlbum;
+  String? mood;
+  List<Films>? films;
+  List<Albums>? albums;
+  List<Series>? series;
+  List<RequestedAlbum>? requestedAlbum;
+  String? error;
 
   Recommendations(
       {required this.mood,
@@ -63,30 +64,34 @@ class Recommendations {
       required this.series,
       required this.requestedAlbum});
 
+  Recommendations.withError(String errorMessage) {
+    error = errorMessage;
+  }
+
   Recommendations.fromJson(Map<String, dynamic> json) {
     mood = json['mood'];
     if (json['films'] != null) {
       films = <Films>[];
       json['films'].forEach((v) {
-        films.add(Films.fromJson(v));
+        films?.add(Films.fromJson(v));
       });
     }
     if (json['albums'] != null) {
       albums = <Albums>[];
       json['albums'].forEach((v) {
-        albums.add(Albums.fromJson(v));
+        albums?.add(Albums.fromJson(v));
       });
     }
     if (json['series'] != null) {
       series = <Series>[];
       json['series'].forEach((v) {
-        series.add(Series.fromJson(v));
+        series?.add(Series.fromJson(v));
       });
     }
     if (json['requestedAlbum'] != null) {
       requestedAlbum = <RequestedAlbum>[];
       json['requestedAlbum'].forEach((v) {
-        requestedAlbum.add(RequestedAlbum.fromJson(v));
+        requestedAlbum?.add(RequestedAlbum.fromJson(v));
       });
     }
   }
