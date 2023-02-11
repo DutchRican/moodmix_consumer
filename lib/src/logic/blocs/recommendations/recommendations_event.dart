@@ -7,7 +7,10 @@ abstract class RecommendationsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetRecommendations extends RecommendationsEvent {}
+class GetRecommendations extends RecommendationsEvent {
+  final String id;
+  const GetRecommendations(this.id);
+}
 
 class RequestRecommendations extends RecommendationsEvent {
   final Release release;

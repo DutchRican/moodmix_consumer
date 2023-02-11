@@ -1,22 +1,24 @@
 part of 'recommendations_bloc.dart';
 
-abstract class RecommendationsState extends Equatable {
-  const RecommendationsState();
+class RecommendationsState extends Equatable {
+  bool isChecking;
+  int count;
+  bool recommendationsRequested;
+  bool isLoading;
+  bool hasLoaded;
+  bool hasError;
+  String? message;
+  Recommendations? recommendations;
+  RecommendationsState(
+      {this.count = 0,
+      this.isChecking = false,
+      this.hasError = false,
+      this.hasLoaded = false,
+      this.isLoading = false,
+      this.message,
+      this.recommendations,
+      this.recommendationsRequested = false});
 
   @override
-  List<Object?> get props => [];
-}
-
-class RecommendationsInitial extends RecommendationsState {}
-
-class RecommendationsLoading extends RecommendationsState {}
-
-class RecommendationsLoaded extends RecommendationsState {
-  final Recommendations recommendations;
-  const RecommendationsLoaded(this.recommendations);
-}
-
-class RecommendationsError extends RecommendationsState {
-  final String? message;
-  const RecommendationsError(this.message);
+  List<Object?> get props => [count, isChecking];
 }

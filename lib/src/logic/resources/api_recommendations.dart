@@ -9,8 +9,8 @@ import '../api_key.dart';
 
 class ApiRecommendations {
   Future<Recommendations?> checkResponse(String releaseId) async {
-    final uri = Uri.parse(
-        "https://nncpbogydkmgdcxdozla.supabase.co/rest/v1/recommendations\?select=*&requestId=eq.${releaseId}");
+    final uri =
+        Uri.parse("https://nncpbogydkmgdcxdozla.supabase.co/rest/v1/recommendations?select=*&requestId=eq.$releaseId");
 
     try {
       var response = await http.get(uri,

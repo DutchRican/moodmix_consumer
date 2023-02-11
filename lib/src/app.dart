@@ -28,7 +28,7 @@ class App extends StatelessWidget {
           ),
           body: BlocListener<RecommendationsBloc, RecommendationsState>(
             listener: (context, state) {
-              if (state is RecommendationsError) {
+              if (state.hasError) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(state.message!),

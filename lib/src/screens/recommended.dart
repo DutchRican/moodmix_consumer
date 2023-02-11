@@ -10,44 +10,34 @@ class Recommended extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (recommendations == null) return Container();
-    return BlocBuilder<RecommendationsBloc, RecommendationsState>(
-      builder: (context, state) {
-        if (state is RecommendationsLoaded) {
-          var recommendations = state.recommendations;
-          return Flexible(
-            fit: FlexFit.loose,
-            flex: 4,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  flex: 0,
-                  child: Container(
-                      padding: const EdgeInsets.only(bottom: 10.0), child: Text("Mood: ${recommendations!.mood}")),
-                ),
-                Flexible(
-                  flex: 4,
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      BuildFilms(films: recommendations.films!),
-                      BuildAlbums(albums: recommendations.albums!),
-                      BuildSeries(series: recommendations.series!),
-                    ],
-                  ),
-                ),
-              ],
+    return BlocBuilder<RecommendationsBloc, RecommendationsState>(builder: (context, state) {
+      var mood = state.recommendations?.mood;
+      return Flexible(
+        fit: FlexFit.loose,
+        flex: 4,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              flex: 0,
+              child: Container(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: mood != null ? Text("Mood: $mood") : Container()),
             ),
-          );
-        } else if (state is RecommendationsLoading) {
-          return _buildLoading();
-        } else {
-          return Container();
-        }
-      },
-    );
+            Flexible(
+              flex: 4,
+              child: ListView(
+                shrinkWrap: true,
+                children: const [
+                  BuildFilms(),
+                  BuildAlbums(),
+                  BuildSeries(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
-
-  Widget _buildLoading() => const Center(child: CircularProgressIndicator());
 }
