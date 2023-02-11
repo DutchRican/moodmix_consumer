@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Films {
   late String? film;
   late String? director;
@@ -49,16 +47,9 @@ class RequestedAlbum {
   RequestedAlbum.fromJson(Map<String, dynamic> json) {
     album = json['album'];
     artist = json['artist'];
-    bool isBadArtist = artist == 'Error parsing request';
-    bool isBadAlbum = album == 'Error parsing request';
-    List<String> test = [];
-    if (!isBadAlbum) {
-      test.add(album);
-    }
-    if (!isBadArtist) {
-      test.add(artist);
-    }
-    information = test.join(' - ');
+    var items = [album, artist];
+    items.removeWhere((element) => element == 'Error parsing request');
+    information = items.join(' - ');
   }
 }
 
@@ -82,7 +73,7 @@ class Recommendations {
   }
 
   Recommendations.fromJson(Map<String, dynamic> json) {
-    mood = json['mood'];
+    mood = json['mood'] == 'Error parsing mood' ? 'Not sure' : json['mood'];
     if (json['films'] != null) {
       films = <Films>[];
       json['films'].forEach((v) {

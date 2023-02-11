@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mood_mix/src/logic/resources/api_repository.dart';
 import 'package:mood_mix/src/logic/models/recommendations.dart';
@@ -23,9 +22,10 @@ class RecommendationsBloc extends Bloc<RecommendationsEvent, RecommendationsStat
           emit(RecommendationsState(count: state.count + 1, recommendations: null, isChecking: true, isLoading: true));
           final recommendations = await _apiRepository.getRecommendations(event.id);
           if (recommendations != null) {
-            emit(RecommendationsState(hasLoaded: true, recommendations: recommendations));
             if (recommendations.error != null) {
               emit(RecommendationsState(count: 0, hasError: true, message: recommendations.error));
+            } else {
+              emit(RecommendationsState(hasLoaded: true, recommendations: recommendations, hasError: false));
             }
           } else {
             await Future.delayed(const Duration(seconds: 3));
