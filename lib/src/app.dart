@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mood_mix/src/logic/blocs/recommendations/recommendations_bloc.dart';
 import 'package:mood_mix/src/screens/description.dart';
 import 'package:mood_mix/src/screens/search.dart';
+import 'package:mood_mix/src/widgets/footer.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -36,19 +37,30 @@ class App extends StatelessWidget {
                 );
               }
             },
-            child: Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
-                child: Column(children: const [
-                  Description(),
-                  SizedBox(
-                    height: 10.0,
+            child: Stack(
+              fit: StackFit.loose,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                  child: Column(
+                    // direction: Axis.vertical,
+                    mainAxisSize: MainAxisSize.max,
+                    children: const [
+                      Description(),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      // Search(),
+                      Expanded(
+                        flex: 4,
+                        child: Search(),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    flex: 4,
-                    child: Search(),
-                  )
-                ])),
+                ),
+                Container(alignment: Alignment.bottomCenter, child: const Footer()),
+              ],
+            ),
           ),
         ),
       ),

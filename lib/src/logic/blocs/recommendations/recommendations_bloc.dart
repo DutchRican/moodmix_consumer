@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mood_mix/src/logic/resources/api_repository.dart';
 import 'package:mood_mix/src/logic/models/recommendations.dart';
@@ -11,13 +12,13 @@ const maxTries = 20;
 
 class RecommendationsBloc extends Bloc<RecommendationsEvent, RecommendationsState> {
   late ApiRepository _apiRepository;
-  RecommendationsBloc() : super(RecommendationsState(count: 0)) {
+  RecommendationsBloc() : super(const RecommendationsState(count: 0)) {
     _apiRepository = ApiRepository();
 
     on<GetRecommendations>((event, emit) async {
       try {
         if (state.count > maxTries) {
-          emit(RecommendationsState(hasError: true, message: "Not getting the requested Recommendations back"));
+          emit(const RecommendationsState(hasError: true, message: "Not getting the requested Recommendations back"));
         } else {
           emit(RecommendationsState(count: state.count + 1, recommendations: null, isChecking: true, isLoading: true));
           final recommendations = await _apiRepository.getRecommendations(event.id);
@@ -32,7 +33,7 @@ class RecommendationsBloc extends Bloc<RecommendationsEvent, RecommendationsStat
           }
         }
       } on NetworkError {
-        emit(RecommendationsState(
+        emit(const RecommendationsState(
             count: 0,
             hasError: true,
             message: "Failed to fetch data, is your device online?",
@@ -45,6 +46,10 @@ class RecommendationsBloc extends Bloc<RecommendationsEvent, RecommendationsStat
     on<RequestRecommendations>((event, _) async {
       await _apiRepository.requestRecommendations(event.release);
       add(GetRecommendations(event.release.id!));
+    });
+
+    on<ClearRecommendations>((event, emit) {
+      emit(const RecommendationsState());
     });
   }
 }

@@ -16,3 +16,5 @@ class RequestRecommendations extends RecommendationsEvent {
   final Release release;
   const RequestRecommendations(this.release);
 }
+
+class ClearRecommendations extends RecommendationsEvent {}

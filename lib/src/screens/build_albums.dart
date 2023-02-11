@@ -19,25 +19,38 @@ class BuildAlbums extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Albums:"),
+            ListTile(
+              leading: const Icon(Icons.music_note),
+              title: Center(
+                child: Text(
+                  "Albums",
+                  style: TextStyle(fontSize: 14, color: Colors.blueGrey[800], fontWeight: FontWeight.w500),
+                ),
+              ),
+              trailing: const Icon(Icons.music_note),
+            ),
             Container(
+              padding: const EdgeInsets.only(bottom: 10),
               alignment: Alignment.center,
               child: Column(
                   children: state.recommendations!.albums!
                       .map((item) => Card(
+                            elevation: 5,
                             child: Column(
                               children: [
                                 ListTile(
                                   title: Text(item.album ?? ""),
-                                  subtitle: Text("Artist: ${item.artist}"),
+                                  subtitle: Text("Artist: ${item.artist ?? 'not listed'}"),
                                 ),
-                                ListTile(
-                                  title: const Text(
-                                    "Description",
-                                    textScaleFactor: 0.8,
-                                  ),
-                                  subtitle: Text(item.albumDescription ?? ""),
-                                ),
+                                item.albumDescription != null
+                                    ? ListTile(
+                                        title: const Text(
+                                          "Description",
+                                          textScaleFactor: 0.8,
+                                        ),
+                                        subtitle: Text(item.albumDescription ?? ""),
+                                      )
+                                    : Container(),
                               ],
                             ),
                           ))
