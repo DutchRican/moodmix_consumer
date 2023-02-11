@@ -1,40 +1,43 @@
 import 'package:flutter/material.dart';
-import '../logic/recommendations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mood_mix/src/logic/blocs/recommendations/recommendations_bloc.dart';
 import 'build_albums.dart';
 import 'build_films.dart';
 import 'build_series.dart';
 
 class Recommended extends StatelessWidget {
-  Recommended({super.key, required this.recommendations});
-  late Recommendations? recommendations;
+  const Recommended({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (recommendations == null) return Container();
-    return Flexible(
-      fit: FlexFit.loose,
-      flex: 4,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Expanded(
-            flex: 0,
-            child:
-                Container(padding: const EdgeInsets.only(bottom: 10.0), child: Text("Mood: ${recommendations!.mood}")),
-          ),
-          Flexible(
-            flex: 4,
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                BuildFilms(films: recommendations!.films),
-                BuildAlbums(albums: recommendations!.albums),
-                BuildSeries(series: recommendations!.series),
-              ],
+    return BlocBuilder<RecommendationsBloc, RecommendationsState>(builder: (context, state) {
+      var mood = state.recommendations?.mood;
+      return Flexible(
+        fit: FlexFit.loose,
+        flex: 4,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              flex: 0,
+              child: Container(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: mood != null ? Text("Mood: $mood") : Container()),
             ),
-          ),
-        ],
-      ),
-    );
+            Flexible(
+              flex: 4,
+              child: ListView(
+                shrinkWrap: true,
+                children: const [
+                  BuildFilms(),
+                  BuildAlbums(),
+                  BuildSeries(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
