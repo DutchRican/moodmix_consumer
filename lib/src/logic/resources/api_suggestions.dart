@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mood_mix/src/logic/models/music_brainz.dart';
 
@@ -11,6 +12,7 @@ class ApiSuggestions {
       var items = Music.fromJson(jsonDecode(resp.body));
       return items.releases?.toList() ?? [];
     } catch (error) {
+      debugPrint("Error: $error");
       return [Release.withError('Data issue / Connection issue')];
     }
   }

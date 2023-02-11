@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mood_mix/src/logic/api_url.dart';
 import 'package:mood_mix/src/logic/models/music_brainz.dart';
@@ -33,6 +34,7 @@ class ApiRecommendations {
       }
       return null;
     } catch (error) {
+      debugPrint("Error: $error");
       return Recommendations.withError('Data issue / Connection issue');
     }
   }

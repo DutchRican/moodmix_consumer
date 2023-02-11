@@ -21,6 +21,7 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RecommendationsBloc, RecommendationsState>(builder: (context, state) {
+      String? information = state.recommendations?.requestedAlbum?.information;
       return Column(
         children: [
           TypeAheadField(
@@ -28,10 +29,12 @@ class _SearchState extends State<Search> {
                   controller: _typeAheadController,
                   // autofocus: true,
                   decoration: const InputDecoration(
+                    hintText: "Album, Artist or Song",
                     border: OutlineInputBorder(),
                   )),
-              hideOnEmpty: true,
-              hideOnLoading: true,
+              // hideOnEmpty: true,
+              // hideOnLoading: true,
+              keepSuggestionsOnLoading: false,
               suggestionsCallback: (query) async {
                 return await _apiRepository.getMusicSuggestions(query);
               },
@@ -42,6 +45,7 @@ class _SearchState extends State<Search> {
               },
               onSuggestionSelected: (suggestion) {
                 _typeAheadController.text = getTitle(suggestion);
+                BlocProvider.of<RecommendationsBloc>(context).add(ClearRecommendations());
                 setState(() {
                   selectedItem = suggestion;
                 });
@@ -63,7 +67,15 @@ class _SearchState extends State<Search> {
                     : const Text("Submit"),
           ),
           !state.isChecking && state.recommendations != null
-              ? Text('results for ${getTitle(selectedItem)}')
+              ? Container(
+                  alignment: Alignment.topLeft,
+                  child: information != null && information.isNotEmpty
+                      ? Text('Showing results for ${state.recommendations?.requestedAlbum?.information}')
+                      : Text(
+                          'Something went wrong fetching album information',
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                )
               : Text(state.count > 0 && state.isChecking ? "Tries: ${state.count}" : ""),
           const Recommended(),
         ],

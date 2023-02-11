@@ -17,25 +17,38 @@ class BuildFilms extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Films:"),
+            ListTile(
+              leading: const Icon(Icons.movie),
+              title: Center(
+                child: Text(
+                  "Films",
+                  style: TextStyle(fontSize: 14, color: Colors.blueGrey[800], fontWeight: FontWeight.w500),
+                ),
+              ),
+              trailing: const Icon(Icons.movie),
+            ),
             Container(
               alignment: Alignment.center,
+              padding: const EdgeInsets.only(bottom: 10),
               child: Column(
                   children: state.recommendations!.films!
                       .map((film) => Card(
+                            elevation: 5,
                             child: Column(
                               children: [
                                 ListTile(
                                   title: Text(film.film ?? ""),
                                   subtitle: Text("Director: ${film.director ?? "not listed"}"),
                                 ),
-                                ListTile(
-                                  title: const Text(
-                                    "Description",
-                                    textScaleFactor: 0.8,
-                                  ),
-                                  subtitle: Text(film.filmDescription ?? ""),
-                                ),
+                                film.filmDescription != null
+                                    ? ListTile(
+                                        title: const Text(
+                                          "Description",
+                                          textScaleFactor: 0.8,
+                                        ),
+                                        subtitle: Text(film.filmDescription ?? ""),
+                                      )
+                                    : Container(),
                               ],
                             ),
                           ))

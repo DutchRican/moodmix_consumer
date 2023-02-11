@@ -21,8 +21,8 @@ class Recommended extends StatelessWidget {
             Expanded(
               flex: 0,
               child: Container(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: mood != null ? Text("Mood: $mood") : Container()),
+                  padding: const EdgeInsets.only(bottom: 10.0, top: 5),
+                  child: mood != null ? Text('Mood: "$mood"') : Container()),
             ),
             Flexible(
               flex: 4,

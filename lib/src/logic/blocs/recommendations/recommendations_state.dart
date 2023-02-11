@@ -1,15 +1,15 @@
 part of 'recommendations_bloc.dart';
 
 class RecommendationsState extends Equatable {
-  bool isChecking;
-  int count;
-  bool recommendationsRequested;
-  bool isLoading;
-  bool hasLoaded;
-  bool hasError;
-  String? message;
-  Recommendations? recommendations;
-  RecommendationsState(
+  final bool isChecking;
+  final int count;
+  final bool recommendationsRequested;
+  final bool isLoading;
+  final bool hasLoaded;
+  final bool hasError;
+  final String? message;
+  final Recommendations? recommendations;
+  const RecommendationsState(
       {this.count = 0,
       this.isChecking = false,
       this.hasError = false,
