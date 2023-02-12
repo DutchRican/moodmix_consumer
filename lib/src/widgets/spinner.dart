@@ -8,8 +8,10 @@ class Spinner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
+      alignment: Alignment.topCenter,
       padding: const EdgeInsets.all(20.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(
               height: 15,

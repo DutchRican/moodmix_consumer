@@ -15,12 +15,12 @@ class Recommended extends StatelessWidget {
       var mood = state.recommendations?.mood;
       return Flexible(
         fit: FlexFit.loose,
-        flex: 4,
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(
-              flex: 0,
+            SizedBox(
+              height: 50,
               child: Container(
                   padding: const EdgeInsets.only(bottom: 10.0, top: 5),
                   child: mood != null ? Text('Mood: "$mood"') : Container()),
